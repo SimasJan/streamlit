@@ -6,7 +6,6 @@ WORKDIR /usr/src/app
 RUN apt-get update --allow-unauthenticated -y
 
 COPY . ./
-COPY iris_streamlit_demo.py app.py
 
 # RUN pip install --no-cache-dir -r Pipfile
 RUN pip install streamlit
