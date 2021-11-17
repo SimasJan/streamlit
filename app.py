@@ -1,19 +1,34 @@
 import streamlit as st
-import numpy as np
-import joblib
+import pandas as pd
 
-#Interface
-st.markdown('## Iris Species Prediction')
-sepal_length = st.number_input('sepal length (cm)')
-sepal_width = st.number_input('sepal width (cm)')
-petal_length = st.number_input('petal length (cm)')
-petal_width = st.number_input('petal width (cm)')
+# Functions
+@st.cache
+def read_local(path):
+    return pd.read_csv(path, encoding='latin-1')
 
-#Predict button
-if st.button('Predict'):
-    model = joblib.load('iris_model_1.pkl')
-    X = np.array([sepal_length, sepal_width, petal_length, petal_width])
-    if any(X <= 0):
-        st.markdown('### Inputs must be greater than 0')
-    else:
-        st.markdown(f'### Prediction is {model.predict([[sepal_length, sepal_width, petal_length, petal_width]])[0]}')
+df = read_local('./assets/data/dummy_recommendations.csv')
+
+# UI
+st.image('./assets/img/logo.png')
+st.write("Use the side menu to select your favourite movies. We will use this to give you awesome recommendations.")
+st.sidebar.title("Select your favourite movies")
+
+movie1 = st.sidebar.selectbox('Select your first movie:', df['original_title'].unique())
+
+df2 = df.drop(df.loc[df['original_title'] == movie1].index, axis=0)
+movie2 = st.sidebar.selectbox('Select your second movie:', df2['original_title'].unique())
+
+df3 = df2.drop(df2.loc[df2['original_title'] == movie2].index, axis=0)
+movie3 = st.sidebar.selectbox('Select your third movie:', df3['original_title'].unique())
+
+if st.sidebar.button(label = 'Submit'):
+    st.write('Based on your preferences, we think you may like the following movies:')
+    st.write(
+        '> **Title**:', str(df['original_title'][0]),
+        '\n \n',
+        '> **Genres**:', ', '.join(str(df['genres'][0]).split('|')),
+        '\n \n',
+        '> **Description:**', str(df['description'][0])
+    )
+
+    st.markdown(f'<p style=“background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;“>Enjoy watching!</p>', unsafe_allow_html=True)
