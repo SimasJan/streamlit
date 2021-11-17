@@ -6,7 +6,7 @@ COPY requirements.txt ./requirements.txt
 
 RUN pip install -r requirements.txt
 # exposing default port for streamlit
-EXPOSE 8501
+EXPOSE 8080
 
 # streamlit-specific commands for config
 ENV LC_ALL=C.UTF-8
@@ -27,10 +27,10 @@ enableXsrfProtection = false\n\
 enableWebsocketCompression = false\n\
 " > /.streamlit/config.toml'
 
-EXPOSE 8501
+EXPOSE 8080
 
 COPY . .
 
-ENTRYPOINT ["streamlit", "run"]
-CMD ["streamlit", "run", "iris_streamlit_demo.py"]
-EXPOSE 8501
+CMD ["python", "-m", "streamlit", "run", "iris_streamlit_demo.py", "--server.port=8080"]
+
+EXPOSE 8080
