@@ -32,4 +32,5 @@ EXPOSE 8501
 COPY . .
 
 ENTRYPOINT ["streamlit", "run"]
-CMD ["iris_streamlit_demo.py"]
+CMD ["streamlit", "run", "iris_streamlit_demo.py"]
+EXPOSE 8501
