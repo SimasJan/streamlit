@@ -6,10 +6,9 @@ import pandas as pd
 def read_local(path):
     return pd.read_csv(path, encoding='latin-1')
 
-df = read_local('./assets/data/dummy_recommendations.csv')
+df = read_local('dummy_recommendations.csv')
 
 # UI
-st.image('./assets/img/logo.png')
 st.write("Use the side menu to select your favourite movies. We will use this to give you awesome recommendations.")
 st.sidebar.title("Select your favourite movies")
 
