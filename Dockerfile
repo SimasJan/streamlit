@@ -30,5 +30,6 @@ enableWebsocketCompression = false\n\
 " > /.streamlit/config.toml'
 
 EXPOSE 8080
-CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
+#CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
+CMD ["streamlit", "run", "app.py", "--server.port=8080"]
 EXPOSE 8080
