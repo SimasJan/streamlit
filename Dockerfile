@@ -8,7 +8,7 @@ RUN apt-get update --allow-unauthenticated -y
 COPY . ./
 
 # RUN pip install --no-cache-dir -r Pipfile
-RUN pip install streamlit joblib
+RUN pip install -r requirements.txt
 
 # streamlit-specific commands for config
 ENV LC_ALL=C.UTF-8
