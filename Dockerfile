@@ -29,10 +29,6 @@ enableXsrfProtection = false\n\
 enableWebsocketCompression = false\n\
 " > /.streamlit/config.toml'
 
-EXPOSE 8501
-#CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
-#CMD ["streamlit run app.py --server.port=8080"]
-# cmd to launch app when container is run
-ENTRYPOINT ["streamlit", "run"]
-CMD ["./app.py"]
-EXPOSE 8501
+EXPOSE 8080
+CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
+EXPOSE 8080
