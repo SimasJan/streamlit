@@ -33,6 +33,6 @@ EXPOSE 8080
 #CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
 #CMD ["streamlit run app.py --server.port=8080"]
 # cmd to launch app when container is run
-ENTRYPOINT ["streamlit", "run", "--server.port=8080"]
+ENTRYPOINT ["/usr/local/bin/streamlit", "run", "--server.port=8080"]
 CMD ["app.py"]
 EXPOSE 8080
