@@ -1,12 +1,17 @@
-FROM python:3.7
+FROM docker.io/python:3.8-slim
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY requirements.txt ./requirements.txt
+# OS Update
+RUN apt-get update --allow-unauthenticated -y
 
-RUN pip install -r requirements.txt
-# exposing default port for streamlit
-EXPOSE 8080
+COPY . ./
+COPY iris_streamlit_demo.py app.py
+
+# RUN pip install --no-cache-dir -r Pipfile
+RUN pip install streamlit
+
+#EXPOSE 8501
 
 # streamlit-specific commands for config
 ENV LC_ALL=C.UTF-8
@@ -27,10 +32,6 @@ enableXsrfProtection = false\n\
 enableWebsocketCompression = false\n\
 " > /.streamlit/config.toml'
 
-EXPOSE 8080
-
-COPY . .
-
-CMD ["python", "-m", "streamlit", "run", "iris_streamlit_demo.py", "--server.port=8080"]
+CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8080"]
 
 EXPOSE 8080
